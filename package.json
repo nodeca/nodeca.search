@@ -1,0 +1,23 @@
+{
+  "name": "nodeca.search",
+  "description": "Nodeca search app",
+  "version": "0.0.1",
+  "keywords": [
+    "nodeca",
+    "search"
+  ],
+  "license": "MIT",
+  "repository": "nodeca/nodeca.search",
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ]
+        }
+      ]
+    ]
+  }
+}

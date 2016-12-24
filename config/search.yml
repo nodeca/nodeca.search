@@ -1,0 +1,34 @@
+search:
+  # base dir path (from root if relative)
+  base: sphinx_data
+
+  # host:port или port (на localhost)
+  #listen: localhost:9304
+
+  # Set `false` if sphinx deamons should not be started (when remote host used)
+  is_local: true
+
+  searchd:
+    read_timeout: 5
+    max_children: 5
+
+  indexes:
+    # default индекс будет всегда пустым, остальные индексы наследуются от него
+    default:
+      type: rt
+      morphology: stem_en,lemmatize_ru_all
+      charset_type: utf-8
+      charset_table: |
+        0..9, A..Z->a..z, _, a..z,
+        U+451->U+435, U+401->U+435, U+410..U+42F->U+430..U+44F, U+430..U+44F
+      ignore_chars: '-, U+AD'
+      preopen: 1
+      min_stemming_len: 4
+      min_word_len: 1
+      stopwords: nodeca.search-data/stopwords.txt
+      wordforms: nodeca.search-data/wordforms.txt
+
+      # Default fields
+      rt_field: content
+      rt_attr_timestamp: ts
+      rt_attr_string: id
