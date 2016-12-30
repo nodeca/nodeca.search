@@ -19,5 +19,14 @@
         }
       ]
     ]
+  },
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "got": "^6.7.1",
+    "lodash": "^4.17.1",
+    "mysql2": "^1.1.2",
+    "mz": "^2.6.0",
+    "serialize-error": "^2.1.0",
+    "write-file-atomic": "^1.2.0"
   }
 }

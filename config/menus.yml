@@ -1,0 +1,5 @@
+menus:
+  admin:
+    navbar:
+      search:
+        to: admin.search.index

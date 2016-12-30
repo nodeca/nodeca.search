@@ -1,0 +1,25 @@
+- self.add_raw_data('search_reindex_task', self.task_info);
+
+#search-reindex-task.search-widget
+  .search-widget__title
+    = self.t('title')
+    | 
+    small(data-bind='visible: started, text: (current() / total() * 100 || 0).toFixed(2) + "%"')
+
+  progress.progress(
+    value=0
+    max=100
+    data-bind='value: (current() / total() * 100) || 0'
+  )
+
+  div
+    button.btn.btn-secondary(
+      data-on-click='admin.search.index.blocks.reindex.start'
+      data-bind='visible: !started()'
+    )= self.t('start')
+
+    button.btn.btn-danger(
+      data-on-click='admin.search.index.blocks.reindex.stop'
+      data-bind='visible: started'
+      style='display: none'
+    )= self.t('stop')

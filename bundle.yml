@@ -1,0 +1,5 @@
+packages:
+  admin:
+    entries:
+      - client/admin
+      - server/admin

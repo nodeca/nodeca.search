@@ -1,0 +1,7 @@
+i18n:
+  en-US:
+    admin:
+      menus:
+        navbar:
+          search: Search
+          search.search: Search
