@@ -17,6 +17,9 @@ search:
   searchd:
     read_timeout: 5
     max_children: 5
+    binlog_path:  binlog
+    pid_file:     pid_file
+    listen:       searchd.sock:mysql41
 
   indexes:
     # default индекс будет всегда пустым, остальные индексы наследуются от него
