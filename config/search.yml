@@ -15,26 +15,21 @@ search:
   reindex_tasks: []
 
   searchd:
-    read_timeout: 5
-    max_children: 5
+    workers:      thread_pool
     binlog_path:  binlog
     pid_file:     pid_file
     listen:       searchd.sock:mysql41
+    seamless_rotate: 1
 
   indexes:
-    # default индекс будет всегда пустым, остальные индексы наследуются от него
-    default:
+    # Default config to inherit. Done to simplify global modifications -
+    # morphology, charset table and others.
+    _default:
       type: rt
-      preopen: 1
-      #morphology: lemmatize_en,lemmatize_ru,lemmatize_de
-      #charset_table: 0..9, _, english, russian
-      #ignore_chars: '-, U+AD'
-      #min_stemming_len: 4
-      #min_word_len: 1
-      #stopwords: /path/to/stopwords.txt
-      #wordforms: /path/to/wordforms.txt
 
-      # Default fields
+    # Commons for content indexes
+    # (there can be other indexes, for typing tooltips etc)
+    '_default_content : _default':
       rt_field: [ content ]
       rt_attr_timestamp: [ ts ]
       rt_attr_string: [ objectid, parentid ]
