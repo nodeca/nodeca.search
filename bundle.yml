@@ -1,5 +1,14 @@
+bundles:
+  frontend:
+    - search
+
+
 packages:
   admin:
     entries:
       - client/admin
       - server/admin
+
+  search:
+    entries:
+      - internal/search

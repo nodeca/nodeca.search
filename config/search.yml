@@ -11,9 +11,6 @@ search:
   # name or path to searchd binary
   #bin: searchd
 
-  # List of tasks to run when starting reindex in admin
-  reindex_tasks: []
-
   searchd:
     workers:      thread_pool
     binlog_path:  binlog
