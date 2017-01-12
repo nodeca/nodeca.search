@@ -1,0 +1,2 @@
+cron:
+  search_reindex: 0 52 2 1 * * # 1st day every month, at 2:52
