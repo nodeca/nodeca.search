@@ -9,5 +9,6 @@ module.exports = function (N, apiPath) {
 
   N.wire.on(apiPath, function* search_reindex_stop() {
     yield N.queue.cancel('search_reindex');
+    yield N.search.reindex_abort();
   });
 };
