@@ -2,3 +2,4 @@ en-US:
   title: 'Re-index'
   start: Start
   stop: Stop
+  cutoff: 'Cutoff (days): '

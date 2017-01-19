@@ -12,7 +12,7 @@
       style='display: none'
     )
 
-  div
+  .forum-group
     button.btn.btn-secondary(
       data-on-click='admin.search.index.blocks.reindex.start'
       data-bind='visible: !started()'
@@ -23,3 +23,7 @@
       data-bind='visible: started'
       style='display: none'
     )= self.t('stop')
+
+    .reindex-cutoff
+      label(for='reindex-cutoff').reindex-cutoff__label= self.t('cutoff')
+      input.reindex-cutoff__input.form-control(type='number', min=0)

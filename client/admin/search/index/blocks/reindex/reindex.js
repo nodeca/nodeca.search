@@ -73,8 +73,9 @@ N.wire.once('navigate.done:admin.search.index', function search_reindex_widget_s
   //
   N.wire.on(module.apiPath + '.start', function reindex_start() {
     var prev_runid = last_runid;
+    var cutoff = Number($('.reindex-cutoff__input').val()) || 0;
 
-    N.io.rpc('admin.search.index.reindex.start')
+    N.io.rpc('admin.search.index.reindex.start', { cutoff })
       .then(function () {
         // reset progress bar to zero,
         // and ignore all updates on the last task
