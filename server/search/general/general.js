@@ -13,6 +13,7 @@ module.exports = function (N, apiPath) {
 
   N.wire.on(apiPath, function search_general(env) {
     env.res.head.title = env.t('title');
+    env.res.head.robots = 'noindex,nofollow';
 
     if (env.params.$query) {
       let query = querystring.parse(env.params.$query);
