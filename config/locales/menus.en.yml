@@ -3,5 +3,4 @@ i18n:
     admin:
       menus:
         navbar:
-          search: Search
-          search.search: Search
+          core.search: Search

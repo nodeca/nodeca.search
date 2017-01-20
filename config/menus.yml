@@ -1,5 +1,8 @@
 menus:
   admin:
     navbar:
-      search:
-        to: admin.search.index
+      core:
+        submenu:
+          search:
+            to: admin.search.index
+            priority: 110
