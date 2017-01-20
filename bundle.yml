@@ -10,5 +10,10 @@ packages:
       - server/admin
 
   search:
+    depends:
+      - common
+
     entries:
+      - client/search
+      - server/search
       - internal/search

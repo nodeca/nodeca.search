@@ -1,0 +1,15 @@
+article#content.search-general
+  != self.partial('@common.blocks.navbar.logo_apps')
+
+  .layout__container.container-fluid.space-top
+    != self.partial('@users.blocks.announces')
+
+    form.form-inline(data-on-submit='search.general:search')
+      input.form-control.col-10(type='text', name='query', value=self.search_query)
+
+      .search-general__buttons.btn-group(role='group')
+        button.btn.btn-secondary.icon.icon-search(type='submit')
+        button.btn.btn-secondary.icon.icon-expand(type='button')
+
+    .search-general__results
+      //- this gets replaced by 'results' partial when search is performed

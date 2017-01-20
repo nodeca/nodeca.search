@@ -1,4 +1,7 @@
 router:
   http.get:
+    search.general:
+      "/search": ~
+
     admin.search.index:
       "/search": ~

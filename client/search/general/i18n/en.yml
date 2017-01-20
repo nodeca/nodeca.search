@@ -1,0 +1,5 @@
+en-US:
+  # TODO: move those to config/locales/search
+  results:
+    forum_topics: 'Forum topics'
+    forum_posts: 'Forum posts'
