@@ -1,5 +1,9 @@
 en-US:
-  # TODO: move those to config/locales/search
-  results:
-    forum_topics: 'Forum topics'
-    forum_posts: 'Forum posts'
+  sort:
+    rel: By relevance
+    date: By date
+  period:
+    0: Everything
+    7: Last week
+    30: Last month
+    365: Last year

@@ -11,3 +11,38 @@
 
   &:after
     content ' '
+
+// styles for search results (forum_topics, forum_posts)
+.search-general__item
+  margin-top 2rem
+
+.search-general__title
+  color $body-color
+  font-size 1.5rem
+
+.search-general__info
+  color $body-color-secondary
+  list-style none
+  margin 0
+  padding 0
+
+.search-general__info-item
+  display inline-block
+
+.search-general__info-link
+  color $body-color-secondary
+
+.search-general__info-item:before
+  content '|'
+  margin 0 0.5em 0 0.5em
+
+.search-general__info-item:first-child:before
+  content ''
+  margin 0
+
+.search-general__info-avatar
+  width 16px
+  height 16px
+  margin 0px 3px
+  border-radius 2px
+  box-shadow 0 0 1px $body-color-secondary

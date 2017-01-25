@@ -23,10 +23,3 @@ search:
     # morphology, charset table and others.
     _default:
       type: rt
-
-    # Commons for content indexes
-    # (there can be other indexes, for typing tooltips etc)
-    '_default_content : _default':
-      rt_field: [ content ]
-      rt_attr_timestamp: [ ts ]
-      rt_attr_string: [ objectid, parentid ]
