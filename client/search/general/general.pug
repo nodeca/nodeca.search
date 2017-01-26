@@ -39,16 +39,17 @@ article#content.search-general
         )= self.t('options')
 
       #search_options.search-general__form-options-container.collapse
-        .row
-          .col-lg-3.col-md-4.col-sm-6.col-12.mb-2.mb-sm-0
-            select.form-control.custom-select(name='sort')
-              each type, i in self.sort_types
-                option(value=type, selected=(self.sort === type))= self.t('sort.' + type)
+        .search-general__form-options-inner
+          .row
+            .col-lg-3.col-md-4.col-sm-6.col-12.mb-2.mb-sm-0
+              select.form-control.custom-select(name='sort')
+                each type, i in self.sort_types
+                  option(value=type, selected=(self.sort === type))= self.t('sort.' + type)
 
-          .col-lg-3.col-md-4.col-sm-6.col-12
-            select.form-control.custom-select(name='period')
-              each type, i in self.period_types
-                option(value=type, selected=(self.period === type))= self.t('period.' + type)
+            .col-lg-3.col-md-4.col-sm-6.col-12
+              select.form-control.custom-select(name='period')
+                each type, i in self.period_types
+                  option(value=type, selected=(self.period === type))= self.t('period.' + type)
 
     .search-general__results
       //- this gets replaced by 'results' partial when search is performed
