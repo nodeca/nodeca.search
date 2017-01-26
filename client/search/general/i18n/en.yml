@@ -1,5 +1,6 @@
 en-US:
-  search: search
+  title: Search
+  search: find
   options: Advanced options
   sort:
     rel: by relevance

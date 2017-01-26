@@ -10,9 +10,16 @@ article#content.search-general
   )
     != self.partial('@users.blocks.announces')
 
+    header.page-head
+      h1.page-head__title(itemprop='name')= self.t('title')
+
     form.search-general__form(data-on-submit='search.general:search')
 
-      input(type='hidden', name='type', value=self.type || self.content_types[0])
+      input(
+        type='hidden'
+        name='type'
+        value=self.type || self.content_types[0]
+      )
 
       .search-general__form-input-container
         .input-group
