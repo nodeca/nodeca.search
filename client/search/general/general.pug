@@ -10,21 +10,38 @@ article#content.search-general
   )
     != self.partial('@users.blocks.announces')
 
-    form.form-inline(data-on-submit='search.general:search')
-      input.form-control.col-10(type='text', name='query', value=self.query)
+    form.search-general__form(data-on-submit='search.general:search')
+
       input(type='hidden', name='type', value=self.type || self.content_types[0])
 
-      .search-general__buttons.btn-group(role='group')
-        button.btn.btn-secondary.icon.icon-search(type='submit')
-        button.btn.btn-secondary.icon.icon-expand(type='button')
+      .search-general__form-input-container
+        .input-group
+          input.form-control(
+            type='text'
+            name='query'
+            value=self.query
+          )
+          span.input-group-btn
+            button.search-general__form-submit.btn.btn-outline-secondary(
+              type='submit'
+            )= self.t('search')
 
-      select.form-control.custom-select(name='sort')
-        each type, i in self.sort_types
-          option(value=type, selected=(self.sort === type))= self.t('sort.' + type)
+        a.search-general__form-options-link(
+          href='#search_options'
+          data-toggle='collapse'
+        )= self.t('options')
 
-      select.form-control.custom-select(name='period')
-        each type, i in self.period_types
-          option(value=type, selected=(self.period === type))= self.t('period.' + type)
+      #search_options.search-general__form-options-container.collapse
+        .row
+          .col-lg-3.col-md-4.col-sm-6.col-12.mb-2.mb-sm-0
+            select.form-control.custom-select(name='sort')
+              each type, i in self.sort_types
+                option(value=type, selected=(self.sort === type))= self.t('sort.' + type)
+
+          .col-lg-3.col-md-4.col-sm-6.col-12
+            select.form-control.custom-select(name='period')
+              each type, i in self.period_types
+                option(value=type, selected=(self.period === type))= self.t('period.' + type)
 
     .search-general__results
       //- this gets replaced by 'results' partial when search is performed

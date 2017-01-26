@@ -6,7 +6,7 @@
 const _       = require('lodash');
 const Promise = require('bluebird');
 
-const sort_types   = [ 'rel', 'date' ];
+const sort_types   = [ 'date', 'rel' ];
 const period_types = [ '0', '7', '30', '365' ];
 
 

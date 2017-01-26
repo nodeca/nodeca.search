@@ -1,9 +1,11 @@
 en-US:
+  search: search
+  options: Advanced options
   sort:
-    rel: By relevance
-    date: By date
+    rel: by relevance
+    date: by date
   period:
-    0: Everything
-    7: Last week
-    30: Last month
-    365: Last year
+    0: all period
+    7: last week
+    30: last month
+    365: last year
