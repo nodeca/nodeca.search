@@ -34,7 +34,9 @@
   &:after
     content ' '
 
+//
 // styles for search results (forum_topics, forum_posts)
+//
 .search-general__item
   margin-top 2rem
 
@@ -45,7 +47,7 @@
 .search-general__info
   color $body-color-secondary
   list-style none
-  margin 0
+  margin 0 0 .5rem
   padding 0
 
 .search-general__info-item
@@ -68,3 +70,19 @@
   margin 0px 3px
   border-radius 2px
   box-shadow 0 0 1px $body-color-secondary
+
+//
+// Content markup styles tweak
+//
+.search-general__content .markup
+  font-size $font-size-sm
+  p
+    margin-bottom .75rem
+  blockquote
+    margin-bottom .75rem
+  .quote
+    padding .75rem
+
+  .quote__content
+    & > p:last-child
+      margin-bottom 0
