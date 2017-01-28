@@ -58,5 +58,5 @@ article#content.search-general
                 each type, i in self.period_types
                   option(value=type, selected=(self.period === type))= self.t('period.' + type)
 
-    .search-general__results
+    .search-results
       //- this gets replaced by 'results' partial when search is performed

@@ -64,7 +64,7 @@ N.wire.on('navigate.done:' + module.apiPath, function page_init(data) {
       return N.wire.emit('navigate.update', {
         $: $(N.runtime.render(module.apiPath + '.results', res)),
         locals: res,
-        $replace: $('.search-general__results')
+        $replace: $('.search-results')
       });
     }).catch(err => {
       N.wire.emit('error', err);

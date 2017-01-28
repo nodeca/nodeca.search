@@ -1,0 +1,67 @@
+@import "nodeca.core/client/common/_variables"
+
+.search-results__tab-counter
+  //color $gray-light
+  color $body-color-secondary
+  margin-left .5rem
+  font-size $font-size-xs
+
+.search-results__nav
+  margin-bottom 1.5rem
+
+//
+// Single result styles
+//
+.search-result
+  margin-bottom 1rem
+
+.search-result__title
+  color $body-color !important
+  font-size $font-size-lg
+  display block
+
+.search-result__stat
+  font-size $font-size-sm
+  color $body-color-secondary
+  list-style none
+  margin 0
+  padding 0
+
+.search-result__stat-item
+  display inline-block
+
+.search-result__stat-item + .search-result__stat-item
+  &:before
+    content '|'
+    margin 0 .5rem
+
+.search-result__stat-link
+  color $body-color-secondary
+
+.search-result__stat-avatar
+  width 1rem
+  height 1rem
+  margin-right .375rem
+  border-radius .125rem
+  box-shadow 0 0 1px $body-color-secondary
+
+.search-result__content
+  margin-top .25rem
+  opacity .8
+
+//
+// Content markup styles tweak
+//
+.search-result__content .markup
+  font-size $font-size-sm
+
+  p
+    margin-bottom .75rem
+  blockquote
+    margin-bottom .75rem
+  .quote
+    padding .75rem
+
+  .quote__content
+    & > p:last-child
+      margin-bottom 0

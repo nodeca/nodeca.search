@@ -1,7 +1,7 @@
 en-US:
   title: Search
   search: find
-  options: Advanced options
+  options: More options
   err_too_short_query: Too short query
   sort:
     rel: by relevance
