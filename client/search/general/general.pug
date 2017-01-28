@@ -44,7 +44,7 @@ article#content.search-general
             .col-lg-3.col-md-4.col-sm-6.col-12.mb-2.mb-sm-0
               select.form-control.custom-select(
                 name='sort'
-                onchange='this.form.submit()'
+                onchange="$('.search-general__form-submit').click();"
               )
                 each type, i in self.sort_types
                   option(value=type, selected=(self.sort === type))= self.t('sort.' + type)
@@ -52,7 +52,7 @@ article#content.search-general
             .col-lg-3.col-md-4.col-sm-6.col-12
               select.form-control.custom-select(
                 name='period'
-                onchange='this.form.submit()'
+                onchange="$('.search-general__form-submit').click();"
               )
                 each type, i in self.period_types
                   option(value=type, selected=(self.period === type))= self.t('period.' + type)
