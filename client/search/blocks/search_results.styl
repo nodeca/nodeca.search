@@ -17,11 +17,14 @@
 
 .search-result__title
   color $body-color !important
-  font-size $font-size-lg
+  font-size 1.25rem
+  line-height 1.2
+  margin-bottom .125rem
   display block
 
+.search-result__stat-narrow
 .search-result__stat
-  font-size $font-size-sm
+  font-size $font-size-xs
   color $body-color-secondary
   list-style none
   margin 0
@@ -30,10 +33,12 @@
 .search-result__stat-item
   display inline-block
 
-.search-result__stat-item + .search-result__stat-item
-  &:before
+.search-result__stat-item
+  &:after
     content '|'
     margin 0 .5rem
+  &:last-child:after
+    content ''
 
 .search-result__stat-link
   color $body-color-secondary
@@ -46,8 +51,17 @@
   box-shadow 0 0 1px $body-color-secondary
 
 .search-result__content
-  margin-top .25rem
+  margin-top .5rem
   opacity .8
+
+
+//
+// Modifications for results with posted content or snippets.
+//
+.search-result__m-with-content
+  .search-result__title
+    font-size 1.5rem
+
 
 //
 // Content markup styles tweak
@@ -65,3 +79,6 @@
   .quote__content
     & > p:last-child
       margin-bottom 0
+
+  .image
+    max-width 50%
