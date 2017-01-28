@@ -35,7 +35,7 @@ article#content.search-general
 
         a.search-general__form-options-link(
           href='#search_options'
-          data-toggle='collapse'
+          data-on-click='search.general:search_options'
         )= self.t('options')
 
       #search_options.search-general__form-options-container.collapse

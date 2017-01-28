@@ -5,9 +5,12 @@
 
 const _           = require('lodash');
 const querystring = require('querystring');
+const bag         = require('bagjs')({ prefix: 'nodeca' });
 
 // An amount of search results to load in one request
 const LOAD_COUNT = 30;
+
+const OPTIONS_STORE_KEY = 'search_form_expanded';
 
 // List of the used key names in query string
 const query_fields = [ 'query', 'type', 'sort', 'period' ];
@@ -23,6 +26,11 @@ const query_fields = [ 'query', 'type', 'sort', 'period' ];
 //
 let pageState = {};
 
+N.wire.on('navigate.done:' + module.apiPath, function form_init() {
+  return bag.get(OPTIONS_STORE_KEY).then(expanded => {
+    if (expanded) $('#search_options').addClass('show');
+  });
+});
 
 // Execute search if it's defined in query
 //
@@ -54,6 +62,20 @@ N.wire.on('navigate.done:' + module.apiPath, function page_init(data) {
       N.wire.emit('error', err);
     });
   }
+});
+
+
+// Toggle form options
+//
+N.wire.on(module.apiPath + ':search_options', function do_options() {
+  return bag.get(OPTIONS_STORE_KEY).then(expanded => {
+    expanded = !expanded;
+
+    if (expanded) $('#search_options').collapse('show');
+    else $('#search_options').collapse('hide');
+
+    return bag.set(OPTIONS_STORE_KEY, expanded);
+  });
 });
 
 
