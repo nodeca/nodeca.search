@@ -42,6 +42,10 @@ N.wire.on('navigate.done:' + module.apiPath, function page_init(data) {
   pageState.next_loading_start = 0;
   pageState.bottom_marker      = 0;
 
+  // Set cursor to input
+  $('.search-general__form-query').focus();
+
+  // Load results if possible
   if (parsed.query) {
     N.io.rpc('search.general.results', _.assign({}, pageState.search, {
       skip:   0,
