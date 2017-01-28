@@ -43,7 +43,7 @@ N.wire.on('navigate.done:' + module.apiPath, function page_init(data) {
   pageState.bottom_marker      = 0;
 
   // Set cursor to input
-  $('.search-general__form-query').focus();
+  $('.search-form__query').focus();
 
   // Load results if possible
   if (parsed.query) {

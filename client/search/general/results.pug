@@ -1,7 +1,10 @@
 .search-general__results
   .nav.nav-tabs-underlined
     each tab in self.tabs
-      a.nav-link(href=tab.link, class=self.type === tab.type ? 'active' : '')
+      a.nav-link(
+        href=tab.link
+        class=(self.type === tab.type ? 'active' : '')
+      )
         span.search-general__count= tab.count
         = self.t('@search.general.menu.' + tab.type)
 

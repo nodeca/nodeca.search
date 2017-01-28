@@ -13,7 +13,7 @@ article#content.search-general
     header.page-head
       h1.page-head__title(itemprop='name')= self.t('title')
 
-    form.search-general__form(data-on-submit='search.general:search')
+    form.search-form(data-on-submit='search.general:search')
 
       input(
         type='hidden'
@@ -21,30 +21,31 @@ article#content.search-general
         value=self.type || self.content_types[0]
       )
 
-      .search-general__form-input-container
+      .search-form__input-container
         .input-group
-          input.search-general__form-query.form-control(
+          input.search-form__query.form-control(
             type='text'
             name='query'
             value=self.query
           )
           span.input-group-btn
-            button.search-general__form-submit.btn.btn-outline-secondary(
+            button.search-form__submit.btn.btn-outline-secondary(
               type='submit'
             )= self.t('search')
 
-        a.search-general__form-options-link(
-          href='#search_options'
-          data-on-click='search.general:search_options'
-        )= self.t('options')
+        .search-form__meta
+          a.search-form__options-toggle(
+            href='#search_options'
+            data-on-click='search.general:search_options'
+          )= self.t('options')
 
-      #search_options.search-general__form-options-container.collapse
-        .search-general__form-options-inner
+      #search_options.collapse
+        .search-form__options-inner
           .row
             .col-lg-3.col-md-4.col-sm-6.col-12.mb-2.mb-sm-0
               select.form-control.custom-select(
                 name='sort'
-                onchange="$('.search-general__form-submit').click();"
+                onchange="$('.search-form__submit').click();"
               )
                 each type, i in self.sort_types
                   option(value=type, selected=(self.sort === type))= self.t('sort.' + type)
@@ -52,7 +53,7 @@ article#content.search-general
             .col-lg-3.col-md-4.col-sm-6.col-12
               select.form-control.custom-select(
                 name='period'
-                onchange="$('.search-general__form-submit').click();"
+                onchange="$('.search-form__submit').click();"
               )
                 each type, i in self.period_types
                   option(value=type, selected=(self.period === type))= self.t('period.' + type)
