@@ -42,12 +42,13 @@ N.wire.on('navigate.done:' + module.apiPath, function page_init(data) {
   pageState.next_loading_start = 0;
   pageState.bottom_marker      = 0;
 
-  // Set cursor to input
+  // Don't set cursor on input - too many side effects on mobiles
+  /*// Set cursor to input
   $('.search-form__query')
     .one('focus', function () {
       this.selectionStart = this.selectionEnd = 10000;
     })
-    .focus();
+    .focus();*/
 
   // Load results if possible
   if (parsed.query) {
