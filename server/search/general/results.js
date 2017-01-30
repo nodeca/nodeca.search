@@ -39,6 +39,14 @@ module.exports = function (N, apiPath) {
       throw N.io.BAD_REQUEST;
     }
 
+    // check query length because 1-character requests consume too much resources
+    if (env.params.query.trim().length < 2) {
+      throw {
+        code: N.io.CLIENT_ERROR,
+        message: env.t('err_query_too_short')
+      };
+    }
+
     let counts = {};
 
     let search_env = {

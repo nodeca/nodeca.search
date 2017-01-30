@@ -94,11 +94,6 @@ N.wire.on(module.apiPath + ':search', function do_search(data) {
   // options with empty query
   if (!data.fields.query.length) return;
 
-  // Reject too short requests
-  if (data.fields.query.length < 2) {
-    return N.wire.emit('notify', t('err_too_short_query'));
-  }
-
   // TODO: can't use "apiPath" syntax for navigate.to 'cause it loads data
   //       with $query in it incorrectly
   return N.wire.emit('navigate.to',
