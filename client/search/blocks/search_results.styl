@@ -55,23 +55,27 @@
 
 .search-result__content
   margin-top .5rem
-  opacity .8
 
 
 //
 // Modifications for results with posted content or snippets.
 //
 
-//.search-result__m-with-content
-//  .search-result__title
-//    font-size 1.25rem
+.search-result__m-with-content
+  .search-result__title
+    font-family $font-family-sans-serif
+    color ($body-color-secondary - 20%) !important
 
+.search-result.search-result__m-with-content
+  border-bottom 1px solid $decorator-color
+  padding-bottom 1rem
 
 //
 // Content markup styles tweak
 //
 .search-result__content .markup
   font-size $font-size-sm
+  font-family $font-family-sans-serif-wide
 
   p
     margin-bottom .75rem
