@@ -8,6 +8,9 @@ search:
   # Set `false` if sphinx deamons should not be started (when remote host used)
   is_local: true
 
+  # Run `optimize index` against all tables after reindex
+  optimize: true
+
   # name or path to searchd binary
   #bin: searchd
 
