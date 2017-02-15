@@ -10,6 +10,15 @@ const bag         = require('bagjs')({ prefix: 'nodeca' });
 // An amount of search results to load in one request
 const LOAD_COUNT = 30;
 
+// A delay after failed xhr request (delay between successful requests
+// is set with affix `throttle` argument)
+//
+// For example, suppose user continuously scrolls. If server is up, each
+// subsequent request will be sent each 100 ms. If server goes down, the
+// interval between request initiations goes up to 2000 ms.
+//
+const LOAD_AFTER_ERROR = 2000;
+
 const OPTIONS_STORE_KEY = 'search_form_expanded';
 
 // List of the used key names in query string
@@ -51,16 +60,24 @@ N.wire.on('navigate.done:' + module.apiPath, function page_init(data) {
     .focus();*/
 
   // Load results if possible
-  if (parsed.query) {
+  if (pageState.search.query) {
+    pageState.next_loading_start = Date.now();
+
     N.io.rpc('search.general.results', _.assign({}, pageState.search, {
       skip:   0,
       limit:  LOAD_COUNT
     })).then(function (res) {
+      pageState.bottom_marker += LOAD_COUNT;
+      pageState.reached_end = res.reached_end;
+
       res.tabs.forEach(tab => {
         tab.link = N.router.linkTo('search.general', {
           $query: _.assign({}, pageState.search, { type: tab.type })
         });
       });
+
+      // reset lock
+      pageState.next_loading_start = 0;
 
       return N.wire.emit('navigate.update', {
         $: $(N.runtime.render(module.apiPath + '.results', res)),
@@ -106,5 +123,44 @@ N.wire.on(module.apiPath + ':search', function do_search(data) {
 // Fetch more results when user scrolls down
 //
 N.wire.on(module.apiPath + ':load_next', function load_next() {
-  // TODO
+  if (!pageState.search.query) return;
+  if (pageState.reached_end) return;
+
+  let now = Date.now();
+
+  // `next_loading_start` is the last request start time, which is reset to 0 on success
+  //
+  // Thus, successful requests can restart immediately, but failed ones
+  // will have to wait `LOAD_AFTER_ERROR` ms.
+  //
+  if (Math.abs(pageState.next_loading_start - now) < LOAD_AFTER_ERROR) return;
+
+  pageState.next_loading_start = now;
+
+  N.io.rpc('search.general.results', _.assign({}, pageState.search, {
+    skip:   pageState.bottom_marker,
+    limit:  LOAD_COUNT
+  })).then(function (res) {
+    pageState.reached_end = res.reached_end;
+
+    // if last search result is loaded, hide bottom placeholder
+    if (pageState.reached_end) {
+      $('.search-results__loading-next').addClass('hidden-xs-up');
+    }
+
+    pageState.bottom_marker += LOAD_COUNT;
+
+    // reset lock
+    pageState.next_loading_start = 0;
+
+    if (!res.results.length) return;
+
+    return N.wire.emit('navigate.update', {
+      $: $(N.runtime.render(module.apiPath + '.' + res.type, res)),
+      locals: res,
+      $after: $('.search-results__list > :last')
+    });
+  }).catch(err => {
+    N.wire.emit('error', err);
+  });
 });

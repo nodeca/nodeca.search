@@ -13,3 +13,8 @@
 
   .search-results__list
     != self.partial('@search.general.' + self.type)
+
+  .search-results__loading-next.nojs-hide(
+    class=(self.reached_end ? 'hidden-xs-up' : '')
+  )
+    span.icon.icon-loading-placeholder

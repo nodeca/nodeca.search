@@ -9,6 +9,16 @@ const Promise = require('bluebird');
 const sort_types   = [ 'date', 'rel' ];
 const period_types = [ '0', '7', '30', '365' ];
 
+// Maximum offset (should be the same as `max_matches` in sphinx),
+// client MAY send higher skip, we just return zero results in that case.
+//
+const MAX_SKIP = 1000;
+
+// Maximum size of one result chunk, it's just a safeguard because
+// client never sends invalid limit value.
+//
+const MAX_LIMIT = 50;
+
 
 module.exports = function (N, apiPath) {
   N.validate(apiPath, {
@@ -16,7 +26,7 @@ module.exports = function (N, apiPath) {
       query:  { type: 'string',  required: true },
       type:   { type: 'string',  required: false },
       skip:   { type: 'integer', required: true, minimum: 0 },
-      limit:  { type: 'integer', required: true, minimum: 0, maximum: 50 },
+      limit:  { type: 'integer', required: true, minimum: 0, maximum: MAX_LIMIT },
       sort:   { 'enum': sort_types,   required: false },
       period: { 'enum': period_types, required: false }
     },
@@ -47,29 +57,39 @@ module.exports = function (N, apiPath) {
       };
     }
 
-    let counts = {};
+    let active_tab_count;
 
-    let search_env = {
-      params: {
-        user_info: env.user_info,
-        query:     env.params.query,
-        period:    env.params.period ? Number(env.params.period) : Number(period_types[0]),
-        sort:      env.params.sort ? env.params.sort : sort_types[0],
-        limit:     env.params.limit,
-        skip:      env.params.skip
-      }
-    };
+    if (env.params.skip < MAX_SKIP) {
+      let search_env = {
+        params: {
+          user_info: env.user_info,
+          query:     env.params.query,
+          period:    env.params.period ? Number(env.params.period) : Number(period_types[0]),
+          sort:      env.params.sort ? env.params.sort : sort_types[0],
+          limit:     env.params.limit,
+          skip:      env.params.skip
+        }
+      };
 
-    yield N.wire.emit('internal:search.general.' + env.params.type, search_env);
+      yield N.wire.emit('internal:search.general.' + env.params.type, search_env);
 
-    env.res.results = search_env.results;
-    env.data.users = (env.res.users || []).concat(search_env.users);
+      env.res.results = search_env.results;
+      env.res.reached_end = search_env.reached_end;
+      env.data.users = (env.res.users || []).concat(search_env.users);
 
-    // set result count for current tab
-    counts[env.params.type] = search_env.count;
+      active_tab_count = search_env.count;
+    } else {
+      env.res.results = [];
+      env.res.reached_end = {};
+    }
 
     // calculate result counts for other tabs (first page only)
     if (env.params.skip === 0) {
+      let counts = {};
+
+      // set result count for current tab
+      counts[env.params.type] = active_tab_count;
+
       let other_tabs = _.without(content_types, env.params.type);
 
       yield Promise.map(other_tabs, Promise.coroutine(function* (type) {
@@ -93,8 +113,8 @@ module.exports = function (N, apiPath) {
         type,
         count: counts[type]
       }));
-
-      env.res.type = env.params.type;
     }
+
+    env.res.type = env.params.type;
   });
 };
