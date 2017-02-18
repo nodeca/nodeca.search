@@ -19,10 +19,21 @@ search:
     binlog_path:  binlog
     pid_file:     pid_file
     listen:       searchd.sock:mysql41
-    seamless_rotate: 1
 
   indexes:
-    # Default config to inherit. Done to simplify global modifications -
+    # Default configs to inherit. Done to simplify global modifications -
     # morphology, charset table and others.
-    _default:
+    _default_base:
       type: rt
+
+    '_default_topic: _default_base':
+      index_exact_words: 1
+
+      min_infix_len: 2
+
+    '_default_content: _default_base':
+      index_exact_words: 1
+
+      html_strip: 1
+      html_index_attrs: a=href;
+      html_remove_elements: blockquote
