@@ -3,9 +3,8 @@
 
 'use strict';
 
-const _           = require('lodash');
-const querystring = require('querystring');
-const bag         = require('bagjs')({ prefix: 'nodeca' });
+const _    = require('lodash');
+const bag  = require('bagjs')({ prefix: 'nodeca' });
 
 // A delay after failed xhr request (delay between successful requests
 // is set with affix `throttle` argument)
@@ -41,7 +40,7 @@ N.wire.on('navigate.done:' + module.apiPath, function form_init() {
 // Execute search if it's defined in query
 //
 N.wire.on('navigate.done:' + module.apiPath, function page_init(data) {
-  let parsed = querystring.parse(data.params.$query);
+  let parsed = data.params.$query;
 
   pageState.search             = _.pick(parsed, query_fields);
   pageState.reached_end        = false;
@@ -111,11 +110,10 @@ N.wire.on(module.apiPath + ':search', function do_search(data) {
   // options with empty query
   if (!data.fields.query.length) return;
 
-  // TODO: can't use "apiPath" syntax for navigate.to 'cause it loads data
-  //       with $query in it incorrectly
-  return N.wire.emit('navigate.to',
-    N.router.linkTo(module.apiPath, { $query: data.fields })
-  );
+  return N.wire.emit('navigate.to', {
+    apiPath: module.apiPath,
+    params: { $query: data.fields }
+  });
 });
 
 

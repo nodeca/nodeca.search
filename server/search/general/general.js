@@ -4,8 +4,7 @@
 
 'use strict';
 
-const _           = require('lodash');
-const querystring = require('querystring');
+const _  = require('lodash');
 
 const sort_types   = [ 'date', 'rel' ];
 const period_types = [ '0', '7', '30', '365' ];
@@ -13,7 +12,19 @@ const period_types = [ '0', '7', '30', '365' ];
 
 module.exports = function (N, apiPath) {
   N.validate(apiPath, {
-    $query: { type: 'string', required: false }
+    $query: {
+      type: 'object',
+      required: false,
+      properties: {
+        query:  { type: 'string' },
+        type:   { type: 'string' },
+        skip:   { type: 'integer', minimum: 0 },
+        limit:  { type: 'integer', minimum: 0 },
+        sort:   { 'enum': sort_types },
+        period: { 'enum': period_types }
+      },
+      additionalProperties: true
+    }
   });
 
   N.wire.on(apiPath, function search_general(env) {
@@ -26,7 +37,7 @@ module.exports = function (N, apiPath) {
     env.res.head.robots = 'noindex,nofollow';
 
     if (env.params.$query) {
-      let query = querystring.parse(env.params.$query);
+      let query = env.params.$query;
 
       // validate content type
       if (query.type && content_types.indexOf(query.type) === -1) {
