@@ -7,9 +7,6 @@ const _           = require('lodash');
 const querystring = require('querystring');
 const bag         = require('bagjs')({ prefix: 'nodeca' });
 
-// An amount of search results to load in one request
-const LOAD_COUNT = 30;
-
 // A delay after failed xhr request (delay between successful requests
 // is set with affix `throttle` argument)
 //
@@ -63,11 +60,13 @@ N.wire.on('navigate.done:' + module.apiPath, function page_init(data) {
   if (pageState.search.query) {
     pageState.next_loading_start = Date.now();
 
+    let items_per_page = N.runtime.page_data.items_per_page;
+
     N.io.rpc('search.general.results', _.assign({}, pageState.search, {
       skip:   0,
-      limit:  LOAD_COUNT
+      limit:  items_per_page
     })).then(function (res) {
-      pageState.bottom_marker += LOAD_COUNT;
+      pageState.bottom_marker += items_per_page;
       pageState.reached_end = res.reached_end;
 
       res.tabs.forEach(tab => {
@@ -137,9 +136,11 @@ N.wire.on(module.apiPath + ':load_next', function load_next() {
 
   pageState.next_loading_start = now;
 
+  let items_per_page = N.runtime.page_data.items_per_page;
+
   N.io.rpc('search.general.results', _.assign({}, pageState.search, {
     skip:   pageState.bottom_marker,
-    limit:  LOAD_COUNT
+    limit:  items_per_page
   })).then(function (res) {
     pageState.reached_end = res.reached_end;
 
@@ -148,7 +149,7 @@ N.wire.on(module.apiPath + ':load_next', function load_next() {
       $('.search-results__loading-next').addClass('hidden-xs-up');
     }
 
-    pageState.bottom_marker += LOAD_COUNT;
+    pageState.bottom_marker += items_per_page;
 
     // reset lock
     pageState.next_loading_start = 0;
