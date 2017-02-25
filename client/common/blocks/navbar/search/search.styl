@@ -1,0 +1,53 @@
+@import "nodeca.core/client/common/_variables"
+
+// Hide default caret from .dropdown-toggle
+.nav-search
+  .nav-link.dropdown-toggle:after
+    display none
+
+.nav-search__m-narrow
+  display none
+
+.nav-search__form
+  display none
+  background-color white
+  border-radius .25rem
+
+.nav-search__go
+.nav-search__input
+.nav-search__select
+.nav-search__close
+  background-color transparent
+  border-color transparent !important
+
+.nav-search__input
+  padding-left 0
+
+
+@media (max-width: $grid-breakpoints.sm - 1)
+  .nav-search__m-wide
+    display none
+  .nav-search__m-narrow
+    display block
+
+@media (min-width: $grid-breakpoints.sm)
+  .nav-search-on
+    .navbar__m-hide-on-search
+    .page-progress
+      display none
+    .nav-search__m-wide
+      flex 1 1 0
+      min-width 0
+      .nav-link
+        display none
+      .nav-search__form
+        display block
+
+    .navbar__right
+      margin-left unset
+      flex-grow 1
+
+  // Should not hide progress on alternate toolbar
+  .navbar-alt
+    .page-progress
+      display flex

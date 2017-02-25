@@ -1,0 +1,85 @@
+//- Only one search method
+if (!self.search_areas)
+
+  li.nav-item.nav-search.nav-search__m-wide
+    a.nav-link.icon.icon-search(
+      href=self.link_to('search.general')
+      title=self.t('search')
+    )
+    form.nav-search__form
+      .input-group
+        span.input-group-btn
+          button.btn.nav-search__go.icon.icon-search
+
+        input.form-control.nav-search__input
+
+        span.input-group-btn
+          button.btn.nav-search__close.icon.icon-x
+
+  li.nav-item.nav-search.nav-search__m-narrow
+    a.nav-link(
+      href=self.link_to('search.general')
+    )
+      = self.t('search')
+
+//- Multiple search methods (selectable)
+else
+
+  li.nav-item.nav-search.nav-search__m-wide
+    a.nav-link.icon.icon-search(
+      href=self.link_to('search.general')
+      title=self.t('search')
+    )
+    form.nav-search__form
+      .input-group
+        span.input-group-btn
+          button.btn.nav-search__go.icon.icon-search
+
+        input.form-control.nav-search__input
+
+        span.input-group-btn
+          - var menu_rnd_id = 'rnd' + String(Math.random()).slice(2, 10)
+
+          button.btn.nav-search__select.dropdown-toggle(
+            href=self.link_to('search.general')
+            id=menu_rnd_id
+            aria-haspopup='true'
+            aria-expanded='false'
+            data-toggle='dropdown'
+          ) in section
+
+          .dropdown-menu.dropdown-menu-right(aria-labelledby=menu_rnd_id)
+            .dropdown-header= self.t('search_dropdown_header')
+
+            button.dropdown-item()
+              = self.t('search_general')
+
+            each area in self.search_areas
+              button.dropdown-item()
+                = area.title
+
+        span.input-group-btn
+          button.btn.nav-search__close.icon.icon-x
+
+  li.nav-item.nav-search.nav-search__m-narrow
+
+    - var menu_rnd_id = 'rnd' + String(Math.random()).slice(2, 10)
+
+    a.nav-link.dropdown-toggle(
+      href=self.link_to('search.general')
+      id=menu_rnd_id
+      aria-haspopup='true'
+      aria-expanded='false'
+      data-toggle='dropdown'
+     )
+      = self.t('search')
+
+    .dropdown-menu.dropdown-menu-right(aria-labelledby=menu_rnd_id)
+      .dropdown-header= self.t('search_dropdown_header')
+
+      a.dropdown-item(href=self.link_to('search.general'))
+        = self.t('search_general')
+
+      each area in self.search_areas
+        a.dropdown-item(href=self.link_to(area.method))
+          = area.title
