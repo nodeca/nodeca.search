@@ -5,16 +5,19 @@ if (!self.search_areas)
     a.nav-link.icon.icon-search(
       href=self.link_to('search.general')
       title=self.t('search')
+      data-on-click='common.blocks.navbar.search:show'
     )
-    form.nav-search__form
+    form.nav-search__form(data-on-submit='common.blocks.navbar.search:submit')
       .input-group
         span.input-group-btn
-          button.btn.nav-search__go.icon.icon-search
+          button.btn.nav-search__go.icon.icon-search(type='submit')
 
-        input.form-control.nav-search__input
+        input.form-control.nav-search__input(name='query')
 
         span.input-group-btn
-          button.btn.nav-search__close.icon.icon-x
+          button.btn.nav-search__close.icon.icon-x(
+            data-on-click='common.blocks.navbar.search:hide'
+          )
 
   li.nav-item.nav-search.nav-search__m-narrow
     a.nav-link(
@@ -29,37 +32,47 @@ else
     a.nav-link.icon.icon-search(
       href=self.link_to('search.general')
       title=self.t('search')
+      data-on-click='common.blocks.navbar.search:show'
     )
-    form.nav-search__form
+    form.nav-search__form(data-on-submit='common.blocks.navbar.search:submit')
       .input-group
         span.input-group-btn
-          button.btn.nav-search__go.icon.icon-search
+          button.btn.nav-search__go.icon.icon-search(type='submit')
 
-        input.form-control.nav-search__input
+        input.form-control.nav-search__input(name='query')
 
         span.input-group-btn
           - var menu_rnd_id = 'rnd' + String(Math.random()).slice(2, 10)
 
+          - var default_area = self.search_areas[0];
           button.btn.nav-search__select.dropdown-toggle(
-            href=self.link_to('search.general')
+            href=self.link_to(default_area.method, { $query: default_area.params })
+            data-method=default_area.method
+            data-params=default_area.params
             id=menu_rnd_id
             aria-haspopup='true'
             aria-expanded='false'
             data-toggle='dropdown'
-          ) in section
+          )= default_area.title
 
           .dropdown-menu.dropdown-menu-right(aria-labelledby=menu_rnd_id)
             .dropdown-header= self.t('search_dropdown_header')
 
-            button.dropdown-item()
+            button.dropdown-item(data-on-click='common.blocks.navbar.search:change_area')
               = self.t('search_general')
 
             each area in self.search_areas
-              button.dropdown-item()
+              button.dropdown-item(
+                data-method=area.method
+                data-params=area.params
+                data-on-click='common.blocks.navbar.search:change_area'
+              )
                 = area.title
 
         span.input-group-btn
-          button.btn.nav-search__close.icon.icon-x
+          button.btn.nav-search__close.icon.icon-x(
+            data-on-click='common.blocks.navbar.search:hide'
+          )
 
   li.nav-item.nav-search.nav-search__m-narrow
 
@@ -81,5 +94,5 @@ else
         = self.t('search_general')
 
       each area in self.search_areas
-        a.dropdown-item(href=self.link_to(area.method))
+        a.dropdown-item(href=self.link_to(area.method, { $query: area.params }))
           = area.title

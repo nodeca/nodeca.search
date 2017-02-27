@@ -80,7 +80,7 @@ module.exports = function (N, apiPath) {
       active_tab_count = search_env.count;
     } else {
       env.res.results = [];
-      env.res.reached_end = {};
+      env.res.reached_end = true;
     }
 
     // calculate result counts for other tabs (first page only)

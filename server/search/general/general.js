@@ -18,8 +18,6 @@ module.exports = function (N, apiPath) {
       properties: {
         query:  { type: 'string' },
         type:   { type: 'string' },
-        skip:   { type: 'integer', minimum: 0 },
-        limit:  { type: 'integer', minimum: 0 },
         sort:   { 'enum': sort_types },
         period: { 'enum': period_types }
       },
