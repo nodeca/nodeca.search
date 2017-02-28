@@ -2,3 +2,4 @@ en-US:
   search: 'Поиск'
   search_dropdown_header: 'Где ищем:'
   search_general: везде
+  search_placeholder: Что ищем

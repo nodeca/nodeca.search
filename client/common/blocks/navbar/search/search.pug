@@ -12,7 +12,10 @@ if (!self.search_areas)
         span.input-group-btn
           button.btn.nav-search__go.icon.icon-search(type='submit')
 
-        input.form-control.nav-search__input(name='query')
+        input.form-control.nav-search__input(
+          placeholder=self.t('search_placeholder')
+          name='query'
+        )
 
         span.input-group-btn
           button.btn.nav-search__close.icon.icon-x(
@@ -39,7 +42,10 @@ else
         span.input-group-btn
           button.btn.nav-search__go.icon.icon-search(type='submit')
 
-        input.form-control.nav-search__input(name='query')
+        input.form-control.nav-search__input(
+          placeholder=self.t('search_placeholder')
+          name='query'
+        )
 
         span.input-group-btn
           - var menu_rnd_id = 'rnd' + String(Math.random()).slice(2, 10)
