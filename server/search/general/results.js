@@ -71,7 +71,7 @@ module.exports = function (N, apiPath) {
         }
       };
 
-      yield N.wire.emit('internal:search.general.' + env.params.type, search_env);
+      yield N.wire.emit('internal:search.' + env.params.type, search_env);
 
       env.res.results = search_env.results;
       env.res.reached_end = search_env.reached_end;
@@ -104,7 +104,7 @@ module.exports = function (N, apiPath) {
           }
         };
 
-        yield N.wire.emit('internal:search.general.' + type, search_env);
+        yield N.wire.emit('internal:search.' + type, search_env);
 
         counts[type] = search_env.count;
       }));

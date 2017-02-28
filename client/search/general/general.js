@@ -112,7 +112,7 @@ N.wire.on(module.apiPath + ':search', function do_search(data) {
 
   return N.wire.emit('navigate.to', {
     apiPath: module.apiPath,
-    params: { $query: data.fields }
+    params: { $query: _.pick(data.fields, query_fields) }
   });
 });
 
@@ -155,7 +155,7 @@ N.wire.on(module.apiPath + ':load_next', function load_next() {
     if (!res.results.length) return;
 
     return N.wire.emit('navigate.update', {
-      $: $(N.runtime.render(module.apiPath + '.' + res.type, res)),
+      $: $(N.runtime.render('search.blocks.' + res.type, res)),
       locals: res,
       $after: $('.search-results__list > :last')
     });
