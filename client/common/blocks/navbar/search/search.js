@@ -20,20 +20,15 @@ function keydown_handler(event) {
 }
 
 
-// Click inside form, need to stop propagation of this event
-// to global handlers
+// Hide search bar if user clicks or moves with "tab" key
+// anywhere outside of it
 //
-function click_inside_form_handler(event) {
-  event.stopPropagation();
-}
-
-
-// Hide search bar if user clicks anywhere outside of it
-//
-function click_outside_form_handler(event) {
+function hide_form_on_focus_out_handler(event) {
   if (event.which === 3 /* right mouse button */) return;
 
-  hide_search_bar();
+  if ($(event.target).closest('.nav-search__form').length === 0) {
+    hide_search_bar();
+  }
 }
 
 
@@ -44,8 +39,7 @@ function show_search_bar() {
   $('.nav-search__input').focus();
 
   $(document).on('keydown', '.nav-search__form', keydown_handler);
-  $(document).on('click focusin', '.nav-search__form', click_inside_form_handler);
-  $(document).on('click focusin', click_outside_form_handler);
+  $(document).on('click focusin', hide_form_on_focus_out_handler);
 }
 
 
@@ -55,8 +49,7 @@ function hide_search_bar() {
   $('.navbar').removeClass('nav-search-on');
 
   $(document).off('keydown', '.nav-search__form', keydown_handler);
-  $(document).off('click focusin', '.nav-search__form', click_inside_form_handler);
-  $(document).off('click focusin', click_outside_form_handler);
+  $(document).off('click focusin', hide_form_on_focus_out_handler);
 }
 
 
