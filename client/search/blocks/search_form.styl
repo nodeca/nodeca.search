@@ -3,7 +3,6 @@
 .search-form
   background-color $decorator-color + 50%
   border-radius .25rem
-  margin-bottom 1.5rem
 
 .search-form__input-container
   padding 1rem 1.25rem .5rem
@@ -33,7 +32,6 @@
   border 1px solid ($decorator-color - 2%)
   border-radius 4px
   background-color white - 0.75%
-  margin-bottom 2.5rem
 
 .search-filter__title
   padding .25rem 0 .25rem .75rem
@@ -41,3 +39,16 @@
 .search-filter__remove
   padding .25rem 1rem
   color $body-color-secondary
+
+//
+//
+//
+.search-form + .search-filter
+  margin-top 1rem
+
+.search-filter + .search-results
+  margin-top 1.625rem
+
+.search-form + .search-results
+  margin-top 1.625rem
+
