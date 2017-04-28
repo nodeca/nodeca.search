@@ -26,6 +26,10 @@ function keydown_handler(event) {
 function hide_form_on_focus_out_handler(event) {
   if (event.which === 3 /* right mouse button */) return;
 
+  // Workaround for firefox: when user presses Alt or clicks on menu, FF
+  // focuses in on document (document is never a focusin target otherwise)
+  if (event.target === document) return;
+
   if ($(event.target).closest('.nav-search__form').length === 0) {
     hide_search_bar();
   }
