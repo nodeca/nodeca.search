@@ -9,10 +9,15 @@ search:
   is_local: true
 
   # Run `optimize index` against all tables after reindex
-  #optimize: true
+  optimize: true
 
   # name or path to searchd binary
   #bin: searchd
+
+  # temporary progressive merge bug workaround (to make 'optimize index' work)
+  common:
+    progressive_merge: 0
+
 
   searchd:
     workers:      thread_pool
