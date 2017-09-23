@@ -5,8 +5,8 @@
 
 
 module.exports = function (N) {
-  N.wire.after('server:admin.search.index', { priority: 50 }, function* search_reindex_widget(env) {
-    let task = yield N.queue.getTask('search_reindex');
+  N.wire.after('server:admin.search.index', { priority: 50 }, async function search_reindex_widget(env) {
+    let task = await N.queue.getTask('search_reindex');
     let task_info = {};
 
     if (task && task.state !== 'finished') {

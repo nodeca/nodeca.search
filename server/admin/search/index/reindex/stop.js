@@ -7,8 +7,8 @@
 module.exports = function (N, apiPath) {
   N.validate(apiPath, {});
 
-  N.wire.on(apiPath, function* search_reindex_stop() {
-    yield N.queue.cancel('search_reindex');
-    yield N.search.reindex_abort();
+  N.wire.on(apiPath, async function search_reindex_stop() {
+    await N.queue.cancel('search_reindex');
+    await N.search.reindex_abort();
   });
 };
