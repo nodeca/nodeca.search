@@ -82,6 +82,10 @@ N.wire.on(module.apiPath + ':submit', function submit_search(data) {
     params.query = data.fields.query;
   }
 
+  if (data.fields.type) {
+    params.type = data.fields.type;
+  }
+
   return N.wire.emit('navigate.to', {
     apiPath,
     params: { $query: params },

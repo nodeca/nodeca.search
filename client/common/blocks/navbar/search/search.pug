@@ -8,6 +8,9 @@ if (!self.search_areas)
       data-on-click='common.blocks.navbar.search:show'
     )
     form.nav-search__form(data-on-submit='common.blocks.navbar.search:submit')
+      if self.search_tab
+        input(type='hidden', name='type', value=self.search_tab)
+
       .input-group
         span.input-group-btn
           button.btn.nav-search__go.icon.icon-search(type='submit')
@@ -38,6 +41,9 @@ else
       data-on-click='common.blocks.navbar.search:show'
     )
     form.nav-search__form(data-on-submit='common.blocks.navbar.search:submit')
+      if self.search_tab
+        input(type='hidden', name='type', value=self.search_tab)
+
       .input-group
         span.input-group-btn
           button.btn.nav-search__go.icon.icon-search(type='submit')
