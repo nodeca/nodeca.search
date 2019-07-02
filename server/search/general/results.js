@@ -115,5 +115,6 @@ module.exports = function (N, apiPath) {
     }
 
     env.res.type = env.params.type;
+    env.res.skip = env.params.skip;
   });
 };
