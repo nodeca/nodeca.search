@@ -28,7 +28,7 @@
     "mysql2": "^1.1.2",
     "mz": "^2.6.0",
     "rimraf": "^2.6.1",
-    "serialize-error": "^3.0.0",
-    "write-file-atomic": "^2.0.0"
+    "serialize-error": "^4.1.0",
+    "write-file-atomic": "^3.0.0"
   }
 }
