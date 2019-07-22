@@ -19,7 +19,7 @@ const query_fields = [ 'query', 'type', 'sort', 'period' ];
 //   - period:           period in days
 //
 let pageState = {};
-let scrollable_list = {};
+let scrollable_list;
 
 function load(start, direction) {
   if (direction !== 'bottom') return null;
