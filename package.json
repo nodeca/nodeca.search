@@ -10,13 +10,13 @@
   "repository": "nodeca/nodeca.search",
   "dependencies": {
     "bluebird": "^3.4.6",
-    "got": "^10.5.7",
+    "got": "^11.6.2",
     "lodash": "^4.17.19",
     "mkdirp": "^1.0.3",
     "mysql2": "^2.1.0",
     "mz": "^2.6.0",
     "rimraf": "^3.0.2",
-    "serialize-error": "^6.0.0",
+    "serialize-error": "^7.0.1",
     "write-file-atomic": "^3.0.0"
   }
 }
