@@ -2,4 +2,5 @@ ru-RU:
   search: Поиск
   search_dropdown_header: 'Где ищем:'
   search_general: везде
-  search_placeholder: Что ищем
+  search_placeholder: Поиск
+  search_go: Искать

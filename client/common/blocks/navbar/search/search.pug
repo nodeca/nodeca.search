@@ -13,7 +13,10 @@ if (!self.search_areas)
 
       .input-group
         span.input-group-btn
-          button.btn.nav-search__go.icon.icon-search(type='submit')
+          button.btn.nav-search__go.icon.icon-search(
+            title=self.t('search_go')
+            type='submit'
+          )
 
         input.form-control.nav-search__input(
           placeholder=self.t('search_placeholder')
