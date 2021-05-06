@@ -10,7 +10,7 @@
   "repository": "nodeca/nodeca.search",
   "dependencies": {
     "got": "^11.6.2",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "mkdirp": "^1.0.3",
     "mysql2": "^2.1.0",
     "mz": "^2.6.0",
