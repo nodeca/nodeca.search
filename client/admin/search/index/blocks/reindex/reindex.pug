@@ -12,17 +12,21 @@
       style='display: none'
     )
 
-  .form-inline
-    button.btn.btn-light(
-      data-on-click='admin.search.index.blocks.reindex.start'
-      data-bind='visible: !started()'
-    )= self.t('start')
+  .row.align-items-baseline.g-0
+    .col-auto
+      button.btn.btn-light(
+        data-on-click='admin.search.index.blocks.reindex.start'
+        data-bind='visible: !started()'
+      )= self.t('start')
 
-    button.btn.btn-danger(
-      data-on-click='admin.search.index.blocks.reindex.stop'
-      data-bind='visible: started'
-      style='display: none'
-    )= self.t('stop')
+      button.btn.btn-danger(
+        data-on-click='admin.search.index.blocks.reindex.stop'
+        data-bind='visible: started'
+        style='display: none'
+      )= self.t('stop')
 
-    label(for='reindex-cutoff').reindex-cutoff__label= self.t('cutoff')
-    input#reindex-cutoff.reindex-cutoff__input.form-control(type='number', min=0)
+    .col-auto
+      label.form-label(for='reindex-cutoff').reindex-cutoff__label= self.t('cutoff')
+
+    .col-auto
+      input#reindex-cutoff.reindex-cutoff__input.form-control(type='number', min=0)
