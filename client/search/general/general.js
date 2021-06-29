@@ -25,7 +25,7 @@ function load(start, direction) {
   if (direction !== 'bottom') return null;
   if (!pageState.search.query) return null;
 
-  return N.io.rpc('search.general.results', _.assign({}, pageState.search, {
+  return N.io.rpc('search.general.results', Object.assign({}, pageState.search, {
     skip:   start,
     limit:  N.runtime.page_data.items_per_page
   })).then(res => {
@@ -62,13 +62,13 @@ N.wire.on('navigate.done:' + module.apiPath, function page_init(data) {
 
   // Load results if possible
   if (pageState.search.query) {
-    N.io.rpc('search.general.results', _.assign({}, pageState.search, {
+    N.io.rpc('search.general.results', Object.assign({}, pageState.search, {
       skip:   0,
       limit:  N.runtime.page_data.items_per_page
     })).then(res => {
       res.tabs.forEach(tab => {
         tab.link = N.router.linkTo('search.general', {
-          $query: _.assign({}, pageState.search, { type: tab.type })
+          $query: Object.assign({}, pageState.search, { type: tab.type })
         });
       });
 

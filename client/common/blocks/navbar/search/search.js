@@ -3,8 +3,6 @@
 
 'use strict';
 
-const _  = require('lodash');
-
 
 // Hide search bar if user presses Escape key,
 // and focus is inside search bar
@@ -75,7 +73,7 @@ N.wire.on(module.apiPath + ':submit', function submit_search(data) {
   hide_search_bar();
 
   let select = data.$this.find('.nav-search__select');
-  let params = _.assign({}, select.data('params'));
+  let params = Object.assign({}, select.data('params'));
   let apiPath = select.data('method') || 'search.general';
 
   if (data.fields.query) {
