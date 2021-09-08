@@ -1,15 +1,16 @@
 .search-results
-  .search-results__nav.content-tabs
+  ul.content-tabs
     - function counter(n) { return Number(n) > 1000 ? '1000+' : n; }
 
     each tab in self.tabs
-      a.content-tabs-item(
-        href=tab.link
-        class=(self.type === tab.type ? 'content-tabs-item__m-active' : '')
-      )
-        = self.t('@search.general.menu.' + tab.type)
-        span.content-tabs-counter(title=tab.count)
-          = counter(tab.count)
+      li.content-tabs-item
+        a.content-tabs-link(
+          href=tab.link
+          class=(self.type === tab.type ? 'active' : '')
+        )
+          = self.t('@search.general.menu.' + tab.type)
+          span.content-tabs-counter(title=tab.count)
+            = counter(tab.count)
 
   .search-results__list
     != self.partial('@search.blocks.' + self.type)
