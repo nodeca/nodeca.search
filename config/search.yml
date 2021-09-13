@@ -15,12 +15,11 @@ search:
   #bin: searchd
 
   # temporary progressive merge bug workaround (to make 'optimize index' work)
-  common:
-    progressive_merge: 0
+  #common:
+  #  progressive_merge: 0
 
 
   searchd:
-    workers:      thread_pool
     binlog_path:  binlog
     pid_file:     pid_file
     listen:       searchd.sock:mysql41
