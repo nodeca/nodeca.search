@@ -1,0 +1,12 @@
+# avoid using "search" namespace to prevent collisions
+search_service:
+  listen: 0.0.0.0:9304
+  log:
+    # general log file
+    system:
+      filename: log/system.log
+      #maxLogSize: 10485760
+      #backups: 4
+    # file for sql queries
+    search:
+      filename: log/search.log
