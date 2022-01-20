@@ -36,8 +36,8 @@ function hide_form_on_focus_out_handler(event) {
 
 // Show search bar
 //
-function show_search_bar() {
-  $('.navbar').addClass('nav-search-on');
+function show_search_bar(data) {
+  data.$this.closest('.navbar').addClass('nav-search-on');
   $('.nav-search__input').focus();
 
   $(document).on('keydown', '.nav-search__form', keydown_handler);

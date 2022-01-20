@@ -2,7 +2,7 @@
 if (!self.search_areas)
 
   .nav-item.nav-search.nav-search__m-wide
-    a.nav-link.icon.icon-search(
+    a.nav-link.nav-search__btn.icon.icon-search(
       href=self.link_to('search.general')
       title=self.t('search')
       data-on-click='common.blocks.navbar.search:show'
@@ -38,7 +38,7 @@ if (!self.search_areas)
 else
 
   .nav-item.nav-search.nav-search__m-wide
-    a.nav-link.icon.icon-search(
+    a.nav-link.nav-search__btn.icon.icon-search(
       href=self.link_to('search.general')
       title=self.t('search')
       data-on-click='common.blocks.navbar.search:show'
