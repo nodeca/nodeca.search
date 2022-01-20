@@ -1,7 +1,7 @@
 //- Only one search method
 if (!self.search_areas)
 
-  li.nav-item.nav-search.nav-search__m-wide
+  .nav-item.nav-search.nav-search__m-wide
     a.nav-link.icon.icon-search(
       href=self.link_to('search.general')
       title=self.t('search')
@@ -28,7 +28,7 @@ if (!self.search_areas)
             data-on-click='common.blocks.navbar.search:hide'
           )
 
-  li.nav-item.nav-search.nav-search__m-narrow
+  .nav-item.nav-search.nav-search__m-narrow
     a.nav-link(
       href=self.link_to('search.general')
     )
@@ -37,7 +37,7 @@ if (!self.search_areas)
 //- Multiple search methods (selectable)
 else
 
-  li.nav-item.nav-search.nav-search__m-wide
+  .nav-item.nav-search.nav-search__m-wide
     a.nav-link.icon.icon-search(
       href=self.link_to('search.general')
       title=self.t('search')
@@ -86,7 +86,7 @@ else
             data-on-click='common.blocks.navbar.search:hide'
           )
 
-  li.nav-item.nav-search.nav-search__m-narrow
+  .nav-item.nav-search.nav-search__m-narrow
 
     - var menu_rnd_id = 'rnd' + self.get_label_uid()
 
