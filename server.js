@@ -7,6 +7,7 @@ const path     = require('path');
 const argparse = require('argparse');
 const log4js   = require('log4js');
 const yaml     = require('js-yaml');
+const cluster  = require('cluster');
 const Server   = require('./').server;
 
 let parser = new argparse.ArgumentParser({ add_help: true });
@@ -65,6 +66,9 @@ let server = new Server(args.path || config?.path || path.resolve(__dirname, 'sp
 
 server
   .start(`http://${listen}/`)
+  .then(() => {
+    if (cluster.isWorker) process.send('ready');
+  })
   .catch(() => {
     process.exit(1);
   });
