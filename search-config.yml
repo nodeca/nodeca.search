@@ -5,8 +5,10 @@ search_service:
     # general log file
     system:
       filename: log/system.log
-      #maxLogSize: 10485760
-      #backups: 4
+      maxLogSize: 10485760
+      backups: 4
     # file for sql queries
     search:
       filename: log/search.log
+      maxLogSize: 10485760
+      backups: 4
