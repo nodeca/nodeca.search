@@ -11,7 +11,7 @@
   "dependencies": {
     "argparse": "^2.0.1",
     "js-yaml": "^4.1.0",
-    "log4js": "^6.3.0",
+    "log4js": "^6.4.0",
     "mkdirp": "^1.0.3",
     "mysql2": "^2.1.0",
     "rimraf": "^3.0.2",
