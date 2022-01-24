@@ -1,16 +1,26 @@
+-
+  let default_area = {
+    method: 'search.general',
+    title:  self.t('search_general'),
+    params: {}
+  };
+
+  if (self.search_method) default_area.method      = self.search_method;
+  if (self.search_tab)    default_area.params.type = self.search_tab;
+
 //- Only one search method
 if (!self.search_areas)
 
-  .nav-item.nav-search.nav-search__m-wide
+  .nav-item.nav-search.nav-search__m-wide(
+    data-method=default_area.method
+    data-params=default_area.params
+  )
     a.nav-link.nav-search__btn.icon.icon-search(
-      href=self.link_to('search.general')
+      href=self.link_to(default_area.method, { $query: default_area.params })
       title=self.t('search')
       data-on-click='common.blocks.navbar.search:show'
     )
     form.nav-search__form(data-on-submit='common.blocks.navbar.search:submit')
-      if self.search_tab
-        input(type='hidden', name='type', value=self.search_tab)
-
       .input-group
         span.input-group-btn
           button.btn.nav-search__go.icon.icon-search(
@@ -30,26 +40,29 @@ if (!self.search_areas)
 
   .nav-item.nav-search.nav-search__m-narrow
     a.nav-link(
-      href=self.link_to('search.general')
+      href=self.link_to(default_area.method, { $query: default_area.params })
     )
       = self.t('search')
 
 //- Multiple search methods (selectable)
 else
 
-  .nav-item.nav-search.nav-search__m-wide
+  .nav-item.nav-search.nav-search__m-wide(
+    data-method=default_area.method
+    data-params=default_area.params
+  )
     a.nav-link.nav-search__btn.icon.icon-search(
-      href=self.link_to('search.general')
+      href=self.link_to(default_area.method, { $query: default_area.params })
       title=self.t('search')
       data-on-click='common.blocks.navbar.search:show'
     )
     form.nav-search__form(data-on-submit='common.blocks.navbar.search:submit')
-      if self.search_tab
-        input(type='hidden', name='type', value=self.search_tab)
-
       .input-group
         span.input-group-btn
-          button.btn.nav-search__go.icon.icon-search(type='submit')
+          button.btn.nav-search__go.icon.icon-search(
+            title=self.t('search_go')
+            type='submit'
+          )
 
         input.form-control.nav-search__input(
           placeholder=self.t('search_placeholder')
@@ -60,20 +73,16 @@ else
           - var menu_rnd_id = 'rnd' + self.get_label_uid()
 
           button.btn.nav-search__select.dropdown-toggle(
-            href=self.link_to('search.general')
             id=menu_rnd_id
             aria-haspopup='true'
             aria-expanded='false'
             data-bs-toggle='dropdown'
-          )= self.t('search_general')
+          )= default_area.title
 
           .dropdown-menu.dropdown-menu-end(aria-labelledby=menu_rnd_id)
             .dropdown-header= self.t('search_dropdown_header')
 
-            button.dropdown-item(data-on-click='common.blocks.navbar.search:change_area')
-              = self.t('search_general')
-
-            each area in self.search_areas
+            each area in [ default_area, ...self.search_areas ]
               button.dropdown-item(
                 data-method=area.method
                 data-params=area.params
@@ -91,7 +100,7 @@ else
     - var menu_rnd_id = 'rnd' + self.get_label_uid()
 
     a.nav-link.dropdown-toggle(
-      href=self.link_to('search.general')
+      href=self.link_to(default_area.method, { $query: default_area.params })
       id=menu_rnd_id
       aria-haspopup='true'
       aria-expanded='false'
@@ -102,9 +111,6 @@ else
     .dropdown-menu.dropdown-menu-end(aria-labelledby=menu_rnd_id)
       .dropdown-header= self.t('search_dropdown_header')
 
-      a.dropdown-item(href=self.link_to('search.general'))
-        = self.t('search_general')
-
-      each area in self.search_areas
+      each area in [ default_area, ...self.search_areas ]
         a.dropdown-item(href=self.link_to(area.method, { $query: area.params }))
           = area.title
