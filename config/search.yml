@@ -32,11 +32,11 @@ search:
 
     '_default_topic: _default_base':
       index_exact_words: 1
-
       min_infix_len: 2
 
     '_default_content: _default_base':
       index_exact_words: 1
+      min_infix_len: 2
 
       html_strip: 1
       html_index_attrs: a=href;
